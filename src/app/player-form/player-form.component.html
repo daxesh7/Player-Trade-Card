@@ -1,0 +1,105 @@
+<section>
+  <h4 class="mb-3">Player's Info</h4>
+  <!-- Form  -->
+  <form class="needs-validation" novalidate>
+    <!-- Form  -->
+    <div class="row g-3">
+      <!-- Form Input First Name & Last Name-->
+      <div class="col-sm-6">
+        <label for="firstName" class="form-label">
+          First Name
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          placeholder=""
+          value=""
+          required
+        />
+        <div class="invalid-feedback">
+          Valid player's first name is required.
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="lastName" class="form-label">
+          Last name
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          placeholder=""
+          value=""
+          required
+        />
+        <div class="invalid-feedback">
+          Valid player's last name is required.
+        </div>
+      </div>
+      <!-- Form Input First Name & Last Name-->
+
+      <!-- Form Input Team Name -->
+      <div class="col-12">
+        <label for="teamName" class="form-label">
+          Team Name
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="teamName"
+          placeholder="Lakers"
+          required
+        />
+        <div class="invalid-feedback">Please enter a player's team name.</div>
+      </div>
+      <!-- Form Input Team Name -->
+
+      <!-- Form Input Player's Number -->
+      <div class="col-12">
+        <label for="playerNumber" class="form-label">
+          Player's Number
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="playerNumber"
+          placeholder="23"
+          required
+        />
+        <div class="invalid-feedback">Please enter a player's number.</div>
+      </div>
+      <!-- Form Input Player's Number -->
+
+      <!-- Form Input Card Value -->
+      <div class="col-12">
+        <label for="username" class="form-label">
+          Estimated Card Value
+          <span class="text-muted">(Optional)</span>
+        </label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">Card Value</span>
+          <input
+            type="number"
+            class="form-control"
+            id="cardValue"
+            placeholder="Enter Card Value"
+            required
+          />
+        </div>
+      </div>
+      <!-- Form Input Card Value -->
+    </div>
+
+    <!-- Add or Update player's info -->
+    <hr class="my-4" />
+    <button class="w-100 btn btn-primary btn-lg" type="submit">
+      Add To Trade
+    </button>
+    <!-- Add or Update player's info -->
+  </form>
+</section>

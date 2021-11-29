@@ -25,6 +25,7 @@
           required
         />
         <div
+          id="firstNameErrors"
           *ngIf="
             firstNameControl &&
             firstNameControl.touched &&
@@ -58,6 +59,7 @@
           required
         />
         <div
+          id="lastNameErrors"
           *ngIf="
             lastNameControl &&
             lastNameControl.touched &&
@@ -90,6 +92,7 @@
           required
         />
         <div
+          id="teamNameErrors"
           *ngIf="
             teamNameControl &&
             teamNameControl.touched &&
@@ -122,6 +125,7 @@
           required
         />
         <div
+          id="playerNumberErrors"
           *ngIf="
             playerNumberControl &&
             playerNumberControl.touched &&
@@ -153,9 +157,9 @@
             id="cardValue"
             formControlName="cardValue"
             placeholder="Enter Card Value"
-            required
           />
           <div
+            id="cardValueErrors"
             *ngIf="
               cardValueControl &&
               cardValueControl.touched &&

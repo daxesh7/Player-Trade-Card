@@ -1,4 +1,4 @@
-import { IPlayerCardState } from './store/state/player.state';
+import { IPlayerCardState } from './player.state';
 
 export interface AppState {
     playerCardState : IPlayerCardState

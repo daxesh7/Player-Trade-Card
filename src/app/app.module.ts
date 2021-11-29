@@ -2,11 +2,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 
 // store
 import {StoreModule} from '@ngrx/store';
 import {playerCardReducer} from './store/reducers/player.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 // compoents
 import { AppComponent } from './app.component';
@@ -17,8 +19,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterPageComponent } from './footer-page/footer-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
+
+
 
 
 
@@ -35,11 +37,12 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule,    
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({
       playerCardState : playerCardReducer
     }),
-    FormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

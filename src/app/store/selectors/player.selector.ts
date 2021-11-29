@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
+import { AppState } from 'src/app/store/state/app.state';
 import { IPlayerCardState } from '../state/player.state';
  
  

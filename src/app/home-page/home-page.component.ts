@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as actions from '../store/actions/player.action';
-import { AppState } from '../app.state';
+import { AppState } from '../store/state/app.state';
 import { UtilService } from '../services/util.service';
 
 @Component({

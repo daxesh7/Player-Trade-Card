@@ -4,7 +4,7 @@ import { UtilService } from '../services/util.service';
 import { Store ,select } from '@ngrx/store';
 import * as selectors from '../store/selectors/player.selector';
 import * as actions from '../store/actions/player.action';
-import { AppState } from '../app.state';
+import { AppState } from '../store/state/app.state';
 
 
 @Component({

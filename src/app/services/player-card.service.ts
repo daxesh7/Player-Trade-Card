@@ -9,8 +9,8 @@ export class PlayerCardService {
   constructor() { }
 
   addToPlayerCardToList(list : IPlayerCard[] , itemToAdd : IPlayerCard) : IPlayerCard[] {
-     list.push(itemToAdd);
-     return list;
+     const newList : IPlayerCard[] = list.concat(itemToAdd);     
+     return newList;
   }
 
   updatePlayerCardToList(list : IPlayerCard[] , itemToUpdate : IPlayerCard) : IPlayerCard[] {
@@ -23,8 +23,11 @@ export class PlayerCardService {
   }
 
   deletePlayerCardFromList(list : IPlayerCard[] , playerNumber : number) : IPlayerCard[] {
-    const index = list.findIndex((palyerCard : IPlayerCard) => palyerCard.playerNumber === playerNumber);
-    const newList = list.splice(index ,1);
+    const newList : IPlayerCard[] = list.map(item => item);    
+    const index = newList.findIndex((palyerCard : IPlayerCard) => palyerCard.playerNumber === playerNumber);
+    if (index > -1) {
+      newList.splice(index, 1);
+    };    
     return newList;
   }
 
@@ -35,7 +38,19 @@ export class PlayerCardService {
 
   getPlayerCardById(list : IPlayerCard[] , playerNumber : number) : IPlayerCard {
     const playerCard  = list.find((palyerCard : IPlayerCard) => palyerCard.playerNumber === playerNumber);
+    // console.log('getPlayerCardById service', playerCard);
+    
     return playerCard ? playerCard : initPlayerCard;
   }
+
+  getEstimatedCardTotal(list : IPlayerCard[]): number {
+    let total = 0;
+    list.forEach(card => {
+      if(card.cardValue){
+        total += card.cardValue;
+      }
+    });
+    return total;
+  };
 
 }

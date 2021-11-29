@@ -178,9 +178,15 @@
 
     <!-- Add or Update player's info -->
     <hr class="my-4" />
-    <button class="w-100 btn btn-primary btn-lg" type="submit">
-      Add To Trade
+    <button
+      id="playerFromButton"
+      class="w-100 btn btn-primary btn-lg"
+      type="submit"
+      [disabled]="!playerCardInfoForm?.valid"
+    >
+      Submit
     </button>
+
     <!-- Add or Update player's info -->
   </form>
 </section>

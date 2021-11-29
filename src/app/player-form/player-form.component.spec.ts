@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { initPlayerCard, IPlayerCard } from '../models/player.model';
+import { playerCardReducer } from '../store/reducers/player.reducer';
 
 import { PlayerFormComponent } from './player-form.component';
 
@@ -13,7 +14,9 @@ fdescribe('PlayerFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
                 ReactiveFormsModule , 
-                StoreModule.forRoot({})
+                StoreModule.forRoot({
+                  playerCardState : playerCardReducer
+                })
               ],
       declarations: [ PlayerFormComponent ]
     })
@@ -57,7 +60,7 @@ fdescribe('PlayerFormComponent', () => {
 
     it('should contain card value input element with 0 default value', () => {
       const formElements = fixture.debugElement.nativeElement.querySelectorAll('input#cardValue');
-      expect(formElements[0].value).toEqual('0');
+      expect(formElements[0].value).toEqual('');
       expect(formElements.length).toEqual(1);
     });
 
@@ -276,11 +279,11 @@ fdescribe('PlayerFormComponent', () => {
       expect(formControl).toBeTruthy();      
       const InputElm = fixture.debugElement.nativeElement.querySelector('input#cardValue');    
       expect(InputElm).toBeTruthy();
-      expect(InputElm.value).toEqual(formControl?.value?.toString());
+      expect(InputElm.value).toEqual('');
       
     });
 
-    it('should not allow empty value', () => {
+    it('should allow empty value', () => {
       const formGroup = component.playerCardInfoForm;      
       const formControl = formGroup?.get('cardValue');          
       const ErrorsElm = fixture.debugElement.nativeElement.querySelector('#cardValueErrors');
@@ -293,7 +296,7 @@ fdescribe('PlayerFormComponent', () => {
       
       expect(ErrorsElm).not.toBeTruthy();
       expect(formControl?.errors?.required).toBeFalsy();
-      expect(formControl?.valid).toBeFalsy();
+      expect(formControl?.valid).toBeTruthy();
     });
 
     it('should allow valid values', () => {

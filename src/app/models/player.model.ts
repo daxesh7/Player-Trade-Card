@@ -1,9 +1,9 @@
-export interface IPlayerCard {
-    playerNumber: number;
+export interface IPlayerCard {    
+    playerNumber: number ;
     firstName : string;
     lastName: string;
     teamName: string;
-    cardValue : number;
+    cardValue : number | null;
 }
 
 export const initPlayerCard : IPlayerCard = {
@@ -11,7 +11,7 @@ export const initPlayerCard : IPlayerCard = {
     firstName : '',
     lastName: '',
     teamName: '',
-    cardValue : 0
+    cardValue : null
 }
 
 // export const initPlayerCardList : IPlayerCard[] = [];

@@ -1,6 +1,6 @@
 // Di
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Output , EventEmitter } from '@angular/core';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable , of} from 'rxjs';
 
 // Store and actions and selectors
@@ -22,8 +22,14 @@ import  {PlayerCardService } from '../services/player-card.service';
 })
 export class PlayerFormComponent implements OnInit {
 
-  public playerCardInfo : IPlayerCard= initPlayerCard;
-  public playerCardInfoForm : FormGroup | undefined;
+  
+ 
+  @Output() public onAdd : EventEmitter<IPlayerCard> = new EventEmitter();
+  @Output() public onUpdate : EventEmitter<IPlayerCard> = new EventEmitter();
+
+  public playerCardInfo : IPlayerCard = initPlayerCard;
+  public playerCardInfoForm : FormGroup  | undefined;
+ 
 
   constructor(
     private store : Store<AppState> ,
@@ -44,47 +50,47 @@ export class PlayerFormComponent implements OnInit {
     // custom validator
     playerNumberValidator(): AsyncValidatorFn {
       return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-        const forbidden = control.value <= 0;           
+        const forbidden = !this.utilService.isNullOrEmpty(control.value) && control.value <= 0;           
         // reutn Observable of error if True    
         return forbidden ? of({inValidPlayerNumber: true}) : of(null);
       };
     }
 
-  ngOnInit(): void {
-    this.playerCardInfoForm = this.formBuilder.group({
-      firstName: [
-        this.playerCardInfo.firstName,
-        [Validators.required, Validators.minLength(2)],
-        // custom validator
-        this.firstNameValidator(),
-      ],
-      lastName: [
-        this.playerCardInfo.lastName,
-        [Validators.required, Validators.minLength(2)]
-        
-      ],        
-      teamName: [
-        this.playerCardInfo.teamName,
-        [Validators.required, Validators.minLength(2)]
-        
-      ],
-      playerNumber: [
-        this.playerCardInfo.playerNumber,
-        [Validators.required],
-        // custom validator 
-        this.playerNumberValidator()
-      ],
-      cardValue: [
-        this.playerCardInfo.cardValue,
-        [],
-        // custom validator 
-        this.playerNumberValidator()
-      ],
-    });
-
+  ngOnInit(): void {   
     this.store.select(selectors.selectorGetSelectedPlayerCard)
     .subscribe((data : IPlayerCard) => {
       this.playerCardInfo = data;
+
+      this.playerCardInfoForm = this.formBuilder.group({
+        firstName: [
+          this.playerCardInfo.firstName,
+          [Validators.required, Validators.minLength(2)],
+          // custom validator
+          this.firstNameValidator(),
+        ],
+        lastName: [
+          this.playerCardInfo.lastName,
+          [Validators.required, Validators.minLength(2)]
+          
+        ],        
+        teamName: [
+          this.playerCardInfo.teamName,
+          [Validators.required, Validators.minLength(2)]
+          
+        ],
+        playerNumber: [
+          this.playerCardInfo.playerNumber,
+          [Validators.required],
+          // custom validator 
+          this.playerNumberValidator()
+        ],
+        cardValue: [
+          this.playerCardInfo.cardValue,
+          [],
+          // custom validator 
+          this.playerNumberValidator()
+        ],
+      });
     })
   }
 
@@ -109,7 +115,9 @@ export class PlayerFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.playerCardInfoForm);
+    // console.log(this.playerCardInfoForm);
+    if(this.playerCardInfoForm && this.playerCardInfoForm.valid)
+    this.onAdd.emit(this.playerCardInfoForm?.value);
   }
 
   

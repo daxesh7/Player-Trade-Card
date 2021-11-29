@@ -46,9 +46,9 @@
       <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between lh-sm">
           <div>
-            <ng-template *ngIf="!isSearchActive; else noSearchResults">
+            <span *ngIf="!isSearchActive; else noSearchResults">
               <small class="text-muted">No Card Added</small>
-            </ng-template>
+            </span>
             <ng-template #noSearchResults>
               <small class="text-muted">No Result Found</small>
             </ng-template>

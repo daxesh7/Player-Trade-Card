@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IPlayerCard } from '../models/player.model';
 import { UtilService } from '../services/util.service';
+import { Store ,select } from '@ngrx/store';
+import * as selectors from '../store/selectors/player.selector';
+import * as actions from '../store/actions/player.action';
+import { AppState } from '../app.state';
+
 
 @Component({
   selector: 'app-player-list',
@@ -14,22 +19,27 @@ export class PlayerListComponent implements OnInit {
   totalCardValue : number = 0;
   searchQuery : string = '';
   isSearchActive : boolean = false;
+  
 
-  constructor(private utilService : UtilService) { }
+  constructor(private utilService : UtilService , private store : Store<AppState>) { }
 
   ngOnInit(): void {
-    this.playerCards = [
-      {firstName:' Ike' , lastName:'Anigbogu' , playerNumber: 14 , teamName: 'Indiana Pacers'},
-      {firstName:' Ron' , lastName:'Baker' , playerNumber: 47 , teamName: 'Knicks'},
-      {firstName:' Jabari' , lastName:'Bird' , playerNumber: 25 , teamName: 'Boston Celtics' , cardValue: 2}
-    ];
-    this.displayPlayerCards = this.playerCards;
-    this.totalCardValue = this.getEstimatedCardTotal();
+    this.store.select(selectors.selectorGetPlayerCards)
+    .subscribe((data : IPlayerCard[]) => {
+      // console.log('data', data);
+      
+      this.playerCards = data;
+      this.displayPlayerCards = data;
+      this.totalCardValue = this.getEstimatedCardTotal();
+      this.isSearchActive = false;
+    });
+    
+    
   }
 
   getEstimatedCardTotal(): number {
     let total = 0;
-    this.playerCards.forEach(card => {
+    this.playerCards?.forEach(card => {
       if(card.cardValue){
         total += card.cardValue;
       }
@@ -40,7 +50,7 @@ export class PlayerListComponent implements OnInit {
   searchPlayerCards(){
     if(!this.utilService.isNullOrEmpty(this.searchQuery)){
       const filterData : IPlayerCard[] = [];
-      this.playerCards.map((playerCard : IPlayerCard) => {
+      this.playerCards?.map((playerCard : IPlayerCard) => {
         if
         (
           this.utilService.compareWithNoCaseSensitive(this.searchQuery,playerCard.firstName) ||

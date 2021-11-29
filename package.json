@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint:ci": "ng lint --fix=true",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless  --code-coverage",
-    "build:ci" : "ng build --configuration=production"
-    
+    "build:ci": "ng build --configuration=production"
   },
   "private": true,
   "dependencies": {

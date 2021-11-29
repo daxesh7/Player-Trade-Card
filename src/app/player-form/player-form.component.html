@@ -1,7 +1,12 @@
-<section>
+<section *ngIf="playerCardInfoForm">
   <h4 class="mb-3">Player's Info</h4>
   <!-- Form  -->
-  <form class="needs-validation" novalidate>
+  <form
+    [formGroup]="playerCardInfoForm"
+    (ngSubmit)="onSubmit()"
+    class="needs-validation"
+    novalidate
+  >
     <!-- Form  -->
     <div class="row g-3">
       <!-- Form Input First Name & Last Name-->
@@ -14,12 +19,28 @@
           type="text"
           class="form-control"
           id="firstName"
+          formControlName="firstName"
           placeholder=""
           value=""
           required
         />
-        <div class="invalid-feedback">
-          Valid player's first name is required.
+        <div
+          *ngIf="
+            firstNameControl &&
+            firstNameControl.touched &&
+            firstNameControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="firstNameControl.errors?.['required']">
+            First Name is required.
+          </div>
+          <div *ngIf="firstNameControl.errors?.['minlength']">
+            Minimum 2 character are required.
+          </div>
+          <div *ngIf="firstNameControl.errors?.['forbiddenName']">
+            'demo' name is not allowed.
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
@@ -31,12 +52,25 @@
           type="text"
           class="form-control"
           id="lastName"
+          formControlName="lastName"
           placeholder=""
           value=""
           required
         />
-        <div class="invalid-feedback">
-          Valid player's last name is required.
+        <div
+          *ngIf="
+            lastNameControl &&
+            lastNameControl.touched &&
+            lastNameControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="lastNameControl.errors?.['required']">
+            Last Name is required.
+          </div>
+          <div *ngIf="lastNameControl.errors?.['minlength']">
+            Minimum 2 character are required.
+          </div>
         </div>
       </div>
       <!-- Form Input First Name & Last Name-->
@@ -51,10 +85,25 @@
           type="text"
           class="form-control"
           id="teamName"
+          formControlName="teamName"
           placeholder="Lakers"
           required
         />
-        <div class="invalid-feedback">Please enter a player's team name.</div>
+        <div
+          *ngIf="
+            teamNameControl &&
+            teamNameControl.touched &&
+            teamNameControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="teamNameControl.errors?.['required']">
+            Team Name is required.
+          </div>
+          <div *ngIf="teamNameControl.errors?.['minlength']">
+            Minimum 2 character are required.
+          </div>
+        </div>
       </div>
       <!-- Form Input Team Name -->
 
@@ -68,10 +117,25 @@
           type="number"
           class="form-control"
           id="playerNumber"
+          formControlName="playerNumber"
           placeholder="23"
           required
         />
-        <div class="invalid-feedback">Please enter a player's number.</div>
+        <div
+          *ngIf="
+            playerNumberControl &&
+            playerNumberControl.touched &&
+            playerNumberControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="playerNumberControl.errors?.['required']">
+            Player Number is required.
+          </div>
+          <div *ngIf="playerNumberControl.errors?.['inValidPlayerNumber']">
+            Minimum Value is 1.
+          </div>
+        </div>
       </div>
       <!-- Form Input Player's Number -->
 
@@ -87,9 +151,22 @@
             type="number"
             class="form-control"
             id="cardValue"
+            formControlName="cardValue"
             placeholder="Enter Card Value"
             required
           />
+          <div
+            *ngIf="
+              cardValueControl &&
+              cardValueControl.touched &&
+              cardValueControl.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="cardValueControl.errors?.['inValidPlayerNumber']">
+              Minimum Value is 1.
+            </div>
+          </div>
         </div>
       </div>
       <!-- Form Input Card Value -->

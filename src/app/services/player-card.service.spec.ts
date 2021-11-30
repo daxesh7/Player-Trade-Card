@@ -38,7 +38,6 @@ fdescribe('PlayerCardService', () => {
     it('Should Change Id before Adding', () => {
       expect(addOutput[0].id).not.toEqual('0');
     });   
-    
   })
 
 });

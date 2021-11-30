@@ -24,3 +24,13 @@ export const initPlayerCardList : IPlayerCard[] = [];
 //     {id: uuid() ,firstName:' Ron' , lastName:'Baker' , playerNumber: 47 , teamName: 'Knicks' , cardValue : 0},
 //     {id : uuid(), firstName:' Jabari' , lastName:'Bird' , playerNumber: 25 , teamName: 'Boston Celtics' , cardValue: 2}
 // ];
+
+export interface ITeamsResponse {
+    id: number;
+    abbreviation: string;
+    city: string;
+    conference: string;
+    division: string;
+    full_name: string;
+    name: string;
+}

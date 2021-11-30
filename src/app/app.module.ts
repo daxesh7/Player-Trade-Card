@@ -2,12 +2,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from  '@angular/common/http';
 
 // store
 import {StoreModule} from '@ngrx/store';
 import {playerCardReducer} from './store/reducers/player.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+
 
 // compoents
 import { AppComponent } from './app.component';
@@ -18,19 +21,12 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterPageComponent } from './footer-page/footer-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { RouterModule, Routes } from '@angular/router';
+
+// custom modules
+import { AppRoutingModule } from './app-routing.module';
 
 
 
-const routes: Routes = [
-  { path: 'home', component: HomePageComponent },
-  { path: 'home/:id', component: HomePageComponent },
-  { path: '', redirectTo:'/home', pathMatch: 'full' },
-  { path: 'about', component: AboutPageComponent },
-  { path: '**', component: PageNotFoundComponent }
-
-];
 
 
 @NgModule({
@@ -46,9 +42,10 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),    
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     StoreModule.forRoot({
       playerCardState : playerCardReducer
     }),

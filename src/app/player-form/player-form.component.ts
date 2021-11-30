@@ -24,8 +24,8 @@ export class PlayerFormComponent implements OnInit {
 
   
  
-  @Output() public onAdd : EventEmitter<IPlayerCard> = new EventEmitter();
-  @Output() public onUpdate : EventEmitter<IPlayerCard> = new EventEmitter();
+  @Output() public onSubmit : EventEmitter<IPlayerCard> = new EventEmitter();
+  
 
   public playerCardInfo : IPlayerCard = initPlayerCard;
   public playerCardInfoForm : FormGroup  | undefined;
@@ -60,38 +60,44 @@ export class PlayerFormComponent implements OnInit {
     this.store.select(selectors.selectorGetSelectedPlayerCard)
     .subscribe((data : IPlayerCard) => {
       this.playerCardInfo = data;
-
-      this.playerCardInfoForm = this.formBuilder.group({
-        firstName: [
-          this.playerCardInfo.firstName,
-          [Validators.required, Validators.minLength(2)],
-          // custom validator
-          this.firstNameValidator(),
-        ],
-        lastName: [
-          this.playerCardInfo.lastName,
-          [Validators.required, Validators.minLength(2)]
-          
-        ],        
-        teamName: [
-          this.playerCardInfo.teamName,
-          [Validators.required, Validators.minLength(2)]
-          
-        ],
-        playerNumber: [
-          this.playerCardInfo.playerNumber,
-          [Validators.required],
-          // custom validator 
-          this.playerNumberValidator()
-        ],
-        cardValue: [
-          this.playerCardInfo.cardValue,
-          [],
-          // custom validator 
-          this.playerNumberValidator()
-        ],
-      });
+      this.setFormBuilder(this.playerCardInfo);      
     })
+  }
+
+  setFormBuilder(playerCardInfo : IPlayerCard) {
+    this.playerCardInfoForm = this.formBuilder.group({
+      id: [
+        playerCardInfo.id,
+      ],
+      firstName: [
+        playerCardInfo.firstName,
+        [Validators.required, Validators.minLength(2)],
+        // custom validator
+        this.firstNameValidator(),
+      ],
+      lastName: [
+        playerCardInfo.lastName,
+        [Validators.required, Validators.minLength(2)]
+        
+      ],        
+      teamName: [
+        playerCardInfo.teamName,
+        [Validators.required, Validators.minLength(2)]
+        
+      ],
+      playerNumber: [
+        playerCardInfo.playerNumber,
+        [Validators.required],
+        // custom validator 
+        this.playerNumberValidator()
+      ],
+      cardValue: [
+        playerCardInfo.cardValue,
+        [],
+        // custom validator 
+        this.playerNumberValidator()
+      ],
+    });
   }
 
   get firstNameControl(){
@@ -114,10 +120,14 @@ export class PlayerFormComponent implements OnInit {
     return this.playerCardInfoForm?.get('cardValue');
   }
 
-  onSubmit(){
+  onCardSubmit(){
     // console.log(this.playerCardInfoForm);
-    if(this.playerCardInfoForm && this.playerCardInfoForm.valid)
-    this.onAdd.emit(this.playerCardInfoForm?.value);
+    if(this.playerCardInfoForm && this.playerCardInfoForm.valid){
+      this.onSubmit.emit(this.playerCardInfoForm?.value);
+      this.playerCardInfo = initPlayerCard;
+      this.playerCardInfoForm.reset();
+    }
+   
   }
 
   

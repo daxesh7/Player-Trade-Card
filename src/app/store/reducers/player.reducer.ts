@@ -2,6 +2,7 @@ import * as PlayerCardActions  from '../actions/player.action';
 import { initPlayerCardState, IPlayerCardState } from '../state/player.state';
 import { PlayerCardService } from '../../services/player-card.service';
 import { createReducer , on} from '@ngrx/store';
+import { initPlayerCard } from 'src/app/models/player.model';
 
 
 export const playerCardReducer = createReducer(
@@ -15,6 +16,7 @@ export const playerCardReducer = createReducer(
         return {
             ...state,
             playerCards: addedList,
+            selectedPlayerCard : initPlayerCard
         };
     }), 
     on(PlayerCardActions.updatePlayerCard , (state : IPlayerCardState, {payload}) => {

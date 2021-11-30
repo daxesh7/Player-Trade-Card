@@ -7,7 +7,7 @@ export class UtilService {
 
   constructor() { }
 
-  isNullOrEmpty(value : string) : boolean {
+  isNullOrEmpty(value : string | null) : boolean {
     return !value || value === '';
   }
 
@@ -18,5 +18,7 @@ export class UtilService {
   compareWithNoCaseSensitive(value1 : string | number , value2 : string | number) : boolean {
     return value1.toString().trim().toLowerCase() === value2.toString().trim().toLowerCase();
   }
+
+  
 
 }

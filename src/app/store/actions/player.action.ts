@@ -21,7 +21,7 @@ export const updatePlayerCard = createAction(
 
 export const deletePlayerCard = createAction(
     PlayerAction.DELETE_PLAYER_CARD,
-    props<{payload : number}>()
+    props<{payload : string}>()
 )
 
 export const getPlayerCards = createAction(
@@ -30,6 +30,6 @@ export const getPlayerCards = createAction(
 
 export const getPlayerCardById = createAction(
     PlayerAction.GET_PLAYER_CARD_BY_ID,
-    props<{payload : number}>()
+    props<{payload : string | null}>()
 )
 

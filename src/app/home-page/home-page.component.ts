@@ -18,7 +18,7 @@ import { PlayerCardService } from '../services/player-card.service';
 })
 export class HomePageComponent implements OnInit {
 
-  playerId : number = -1;
+  playerId : string | null = '0';
   playerCards : IPlayerCard[] = [];  
   totalCardValue : number = 0;
 
@@ -37,9 +37,9 @@ export class HomePageComponent implements OnInit {
     this.store.dispatch(actions.getPlayerCards());
     // based on parma do get by Id Call
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      const id = paramMap.get('id');      
-      if(!this.utilService.isNaN(Number(id))) {
-        this.playerId = Number(id);        
+      const id : string | null = paramMap.get('id');      
+      if(!this.utilService.isNullOrEmpty(id) && id !== '0') {
+        this.playerId = id;        
         this.store.dispatch(actions.getPlayerCardById({payload: this.playerId}));
       }else {
         this.router.navigate(['/']);
@@ -56,27 +56,34 @@ export class HomePageComponent implements OnInit {
 
   }
 
-  
-
-  addCardHandler(itemToAdd : IPlayerCard ) {
-    // console.log('addCardHandler', itemToAdd);
-    this.store.dispatch(actions.addPlayerCard({payload : itemToAdd}));
+  submitCardHandler(itemToSubmit : IPlayerCard ) {
+    console.log('submitCardHandler', itemToSubmit);
+    if(!itemToSubmit.id || itemToSubmit.id === '0'){
+      this.store.dispatch(actions.addPlayerCard({payload : itemToSubmit}));
+    }else {
+      this.store.dispatch(actions.updatePlayerCard({payload : itemToSubmit}));
+    }
   }
 
-  updateHandler(itemToUpdate : IPlayerCard ) {
-    // console.log('addCardHandler', itemToAdd);
-    this.store.dispatch(actions.updatePlayerCard({payload : itemToUpdate}));
-  }
+  // addCardHandler(itemToAdd : IPlayerCard ) {
+  //   // console.log('addCardHandler', itemToAdd);
+  //   this.store.dispatch(actions.addPlayerCard({payload : itemToAdd}));
+  // }
+
+  // updateHandler(itemToUpdate : IPlayerCard ) {
+  //   // console.log('addCardHandler', itemToAdd);
+  //   
+  // }
 
   removeCardHandler(itemToRemove : IPlayerCard ) {
     // console.log('addCardHandler', itemToAdd);
-    this.store.dispatch(actions.deletePlayerCard({payload : itemToRemove.playerNumber}));
+    this.store.dispatch(actions.deletePlayerCard({payload : itemToRemove.id}));
   }
 
   selectCardHandler(itemSelected : IPlayerCard ) {
     // console.log('selectCardHandler', itemSelected);
     // this.store.dispatch(actions.getPlayerCardById({payload : itemSelected.playerNumber}));
-    this.router.navigate(['/home', itemSelected.playerNumber])
+    this.router.navigate(['/home', itemSelected.id])
   }
 
 }

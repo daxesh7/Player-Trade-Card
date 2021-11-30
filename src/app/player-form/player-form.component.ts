@@ -38,7 +38,12 @@ export class PlayerFormComponent implements OnInit {
     private formBuilder : FormBuilder
     ) { }
 
-    // custom validator
+    /*
+    * describe : This a is async custom validator 
+    * on the first name to not have value as 'demo'
+    * param: none
+    * retrun: void 
+    */
     firstNameValidator(): AsyncValidatorFn {
       return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
         const forbidden = control.value === 'demo';   
@@ -47,7 +52,12 @@ export class PlayerFormComponent implements OnInit {
       };
     }
 
-    // custom validator
+    /*
+    * describe : This a is async custom validator 
+    * on the player number to not have negative value
+    * param: none
+    * retrun: void 
+    */
     playerNumberValidator(): AsyncValidatorFn {
       return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
         const forbidden = !this.utilService.isNullOrEmpty(control.value) && control.value <= 0;           
@@ -64,6 +74,12 @@ export class PlayerFormComponent implements OnInit {
     })
   }
 
+   /*
+    * describe : This a is async custom function 
+    * set the form base on the PlayerCard Model values
+    * param: {IPlayerCard} playerCardInfo
+    * retrun: void 
+    */
   setFormBuilder(playerCardInfo : IPlayerCard) {
     this.playerCardInfoForm = this.formBuilder.group({
       id: [
@@ -100,34 +116,73 @@ export class PlayerFormComponent implements OnInit {
     });
   }
 
+   /*
+    * describe : This is a function 
+    * get the firstName form Control from the form group
+    * which is used to validate fields in html and errors
+    * param: none
+    * retrun: void 
+    */ 
   get firstNameControl(){
     return this.playerCardInfoForm?.get('firstName');
   }
 
+  /*
+    * describe : This is a function 
+    * get the last Name form Control from the form group
+    * which is used to validate fields in html and errors
+    * param: none
+    * retrun: void 
+    */
   get lastNameControl(){
     return this.playerCardInfoForm?.get('lastName');
   }
 
+  /*
+    * describe : This is a function 
+    * get the team Name form Control from the form group
+    * which is used to validate fields in html and errors
+    * param: none
+    * retrun: void 
+    */
   get teamNameControl(){
     return this.playerCardInfoForm?.get('teamName');
   }
 
+  /*
+    * describe : This is a function 
+    * get the player Number form Control from the form group
+    * which is used to validate fields in html and errors
+    * param: none
+    * retrun: void 
+    */
   get playerNumberControl(){
     return this.playerCardInfoForm?.get('playerNumber');
   }
 
+  /*
+    * describe : This is a function 
+    * get the card value form Control from the form group
+    * which is used to validate fields in html and errors
+    * param: none
+    * retrun: void 
+    */
   get cardValueControl(){
     return this.playerCardInfoForm?.get('cardValue');
   }
 
-  submitCard(){
-    // console.log(this.playerCardInfoForm);
+  /*
+  * describe : This function that handles submit event from the form
+  * and reset the form , emited value is handle to dispatch add and upadte actions
+  * param: none
+  * retrun: void 
+  */
+  submitCard(){    
     if(this.playerCardInfoForm && this.playerCardInfoForm.valid){
       this.submitCardEvent.emit(this.playerCardInfoForm?.value);
       this.playerCardInfo = initPlayerCard;
       this.playerCardInfoForm.reset();
-    }
-   
+    }   
   }
 
   

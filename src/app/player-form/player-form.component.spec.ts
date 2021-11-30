@@ -54,7 +54,7 @@ describe('PlayerFormComponent', () => {
 
     it('should contain player number input element with 0 default value', () => {
       const formElements = fixture.debugElement.nativeElement.querySelectorAll('input#playerNumber');
-      expect(formElements[0].value).toEqual('0');
+      expect(formElements[0].value).toEqual('');
       expect(formElements.length).toEqual(1);
     });
 
@@ -215,7 +215,7 @@ describe('PlayerFormComponent', () => {
       expect(formControl).toBeTruthy();      
       const InputElm = fixture.debugElement.nativeElement.querySelector('input#playerNumber');    
       expect(InputElm).toBeTruthy();
-      expect(InputElm.value).toEqual(formControl?.value?.toString());
+      expect(InputElm.value).toEqual('');
       
     });
 

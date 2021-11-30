@@ -40,11 +40,23 @@ export class PlayerListComponent implements OnInit {
     
   }
 
+  /*
+  * describe : This function that calculates total of all card values
+  * param: none
+  * retrun: number 
+  */
   getEstimatedCardTotal(): number {
     let total = this.playerCardService.getEstimatedCardTotal(this.playerCards);
     return total;
   };
 
+  /*
+  * describe : This function that handles search event on the list
+  * and which is triggered on click of search button and 
+  * set search item to display list
+  * param: none
+  * retrun: void 
+  */
   searchPlayerCards(){
     if(!this.utilService.isNullOrEmpty(this.searchQuery)){
       const filterData : IPlayerCard[] = [];
@@ -65,6 +77,13 @@ export class PlayerListComponent implements OnInit {
     };    
   }
 
+  /*
+  * describe : This function that handles search event on the list
+  * and which is triggered on kekup and when it is empty it
+  * reset the dispaly item to actual item from state
+  * param: none
+  * retrun: void 
+  */
   searchValueChange(){
     if(this.utilService.isNullOrEmpty(this.searchQuery)){
       this.displayPlayerCards = this.playerCards;
@@ -72,10 +91,22 @@ export class PlayerListComponent implements OnInit {
     };    
   }
 
+  /*
+  * describe : This function that handles remove event from the list
+  * and emit value which is handle to dispatch remove action
+  * param: {IPlayerCard} playerCard
+  * retrun: void 
+  */
   removeCard(playerCard : IPlayerCard) {
     this.removeCardEvent.emit(playerCard);
   }
 
+  /*
+  * describe : This function that handles select event from the list
+  * and emit value which is handle to dispatch select actions
+  * param: {IPlayerCard} playerCard
+  * retrun: void 
+  */
   selectCard(playerCard : IPlayerCard) {
     this.selectCardEvent.emit(playerCard);
   }

@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 export interface IPlayerCard {    
     id : string;
-    playerNumber: number ;
+    playerNumber: number | null ;
     firstName : string;
     lastName: string;
     teamName: string;
@@ -11,7 +11,7 @@ export interface IPlayerCard {
 
 export const initPlayerCard : IPlayerCard = {
     id : '0',
-    playerNumber: 0,
+    playerNumber: null,
     firstName : '',
     lastName: '',
     teamName: '',

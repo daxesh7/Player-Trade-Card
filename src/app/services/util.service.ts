@@ -11,14 +11,14 @@ export class UtilService {
     return !value || value === '';
   }
 
-  isNaN(value : string | number) : boolean {
-    return isNaN(Number(value)) ? true : false
+  isNumber(value : string | number) : boolean {
+    return isNaN(Number(value)) ? false : true
   }
 
   compareWithNoCaseSensitive(value1 : string | number , value2 : string | number) : boolean {
     return value1.toString().trim().toLowerCase() === value2.toString().trim().toLowerCase();
   }
 
-  
+
 
 }

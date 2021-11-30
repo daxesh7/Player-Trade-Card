@@ -49,15 +49,21 @@ export class HomePageComponent implements OnInit {
     //selectors
     this.store.select(selectors.selectorGetPlayerCards)
     .subscribe((data : IPlayerCard[]) => {
-      console.log('selectorGetPlayerCards', data);
+      // console.log('selectorGetPlayerCards', data);
       this.playerCards = data;
       this.totalCardValue = this.playerCardService.getEstimatedCardTotal(data);
     });
 
-  }
+  };
 
+  /*
+  * describe : This handler is dispatch the action based 
+  * on the id to Add or Update the Card
+  * param: {IPlayerCard} itemToSubmit
+  * retrun: void 
+  */
   submitCardHandler(itemToSubmit : IPlayerCard ) {
-    console.log('submitCardHandler', itemToSubmit);
+    // console.log('submitCardHandler', itemToSubmit);
     if(!itemToSubmit.id || itemToSubmit.id === '0'){
       this.store.dispatch(actions.addPlayerCard({payload : itemToSubmit}));
     }else {
@@ -65,23 +71,23 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  // addCardHandler(itemToAdd : IPlayerCard ) {
-  //   // console.log('addCardHandler', itemToAdd);
-  //   this.store.dispatch(actions.addPlayerCard({payload : itemToAdd}));
-  // }
-
-  // updateHandler(itemToUpdate : IPlayerCard ) {
-  //   // console.log('addCardHandler', itemToAdd);
-  //   
-  // }
-
-  removeCardHandler(itemToRemove : IPlayerCard ) {
-    // console.log('addCardHandler', itemToAdd);
+  /*
+  * describe : This handler is dispatch the action based 
+  * on the id to Remove the Card
+  * param: {IPlayerCard} itemToRemove
+  * retrun: void 
+  */
+  removeCardHandler(itemToRemove : IPlayerCard ) {    
     this.store.dispatch(actions.deletePlayerCard({payload : itemToRemove.id}));
   }
 
-  selectCardHandler(itemSelected : IPlayerCard ) {
-    // console.log('selectCardHandler', itemSelected);
+  /*
+  * describe : This handler is dispatch the action based 
+  * on the id to select the Card to fill out form
+  * param: {IPlayerCard} itemSelected
+  * retrun: void 
+  */
+  selectCardHandler(itemSelected : IPlayerCard ) {    
     this.store.dispatch(actions.getPlayerCardById({payload : itemSelected.id}));
     // this.router.navigate(['/home', itemSelected.id])
   }

@@ -1,0 +1,83 @@
+<section>
+  <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Total card value</span>
+    <span class="badge bg-primary rounded-pill"> {{ totalCardValue }}</span>
+  </h4>
+
+  <div class="search-container">
+    <form class="card" #searchCard="ngForm" (ngSubmit)="searchPlayerCards()">
+      <div class="input-group">
+        <input
+          [(ngModel)]="searchQuery"
+          name="searchQuery"
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          (keyup)="searchValueChange()"
+        />
+        <button type="submit" class="btn btn-secondary">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <div
+    class="py-4"
+    id="cardListContainer"
+    *ngIf="
+      displayPlayerCards && displayPlayerCards.length > 0;
+      else NoCardAdded
+    "
+  >
+    <ul class="list-group mb-3" id="cardList">
+      <li
+        *ngFor="let playerCard of displayPlayerCards"
+        class="list-group-item d-flex justify-content-between lh-sm"
+      >
+        <div class="fixed-action-btn" style="bottom: 45px; right: 20px">
+          <button
+            class="btn btn-outline-danger btn-floating btn-sm float-left"
+            (click)="removeCard(playerCard)"
+          >
+            x
+          </button>
+          <button
+            class="btn btn-outline-info btn-floating btn-sm float-left"
+            style="margin-left: 5px"
+            (click)="selectCard(playerCard)"
+          >
+            Edit
+          </button>
+        </div>
+
+        <div>
+          <h6 class="my-0">
+            {{ playerCard.firstName + " " + playerCard.lastName }}
+          </h6>
+
+          <small class="text-muted">{{ playerCard.teamName }}</small>
+        </div>
+        <span class="badge bg-primary rounded-pill" id="playerCardValue">{{
+          playerCard.cardValue || 0
+        }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #NoCardAdded>
+    <div class="py-4">
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <div>
+            <span *ngIf="!isSearchActive; else noSearchResults">
+              <small class="text-muted">No Card Added</small>
+            </span>
+            <ng-template #noSearchResults>
+              <small class="text-muted">No Result Found</small>
+            </ng-template>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template> No serach results </ng-template>
+  </ng-template>
+</section>

@@ -1,0 +1,192 @@
+<section *ngIf="playerCardInfoForm">
+  <h4 class="mb-3">Player's Info</h4>
+  <!-- Form  -->
+  <form
+    [formGroup]="playerCardInfoForm"
+    (ngSubmit)="submitCard()"
+    class="needs-validation"
+    novalidate
+  >
+    <!-- Form  -->
+    <div class="row g-3">
+      <!-- Form Input First Name & Last Name-->
+      <div class="col-sm-6">
+        <label for="firstName" class="form-label">
+          First Name
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+          placeholder=""
+          value=""
+          required
+        />
+        <div
+          id="firstNameErrors"
+          *ngIf="
+            firstNameControl &&
+            firstNameControl.touched &&
+            firstNameControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="firstNameControl.errors?.['required']">
+            First Name is required.
+          </div>
+          <div *ngIf="firstNameControl.errors?.['minlength']">
+            Minimum 2 character are required.
+          </div>
+          <div *ngIf="firstNameControl.errors?.['forbiddenName']">
+            'demo' name is not allowed.
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="lastName" class="form-label">
+          Last name
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          formControlName="lastName"
+          placeholder=""
+          value=""
+          required
+        />
+        <div
+          id="lastNameErrors"
+          *ngIf="
+            lastNameControl &&
+            lastNameControl.touched &&
+            lastNameControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="lastNameControl.errors?.['required']">
+            Last Name is required.
+          </div>
+          <div *ngIf="lastNameControl.errors?.['minlength']">
+            Minimum 2 character are required.
+          </div>
+        </div>
+      </div>
+      <!-- Form Input First Name & Last Name-->
+
+      <!-- Form Input Team Name -->
+      <div class="col-12">
+        <label for="teamName" class="form-label">
+          Team Name
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="teamName"
+          formControlName="teamName"
+          placeholder="Lakers"
+          required
+        />
+        <div
+          id="teamNameErrors"
+          *ngIf="
+            teamNameControl &&
+            teamNameControl.touched &&
+            teamNameControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="teamNameControl.errors?.['required']">
+            Team Name is required.
+          </div>
+          <div *ngIf="teamNameControl.errors?.['minlength']">
+            Minimum 2 character are required.
+          </div>
+        </div>
+      </div>
+      <!-- Form Input Team Name -->
+
+      <!-- Form Input Player's Number -->
+      <div class="col-12">
+        <label for="playerNumber" class="form-label">
+          Player's Number
+          <span class="text-muted">*</span>
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="playerNumber"
+          formControlName="playerNumber"
+          placeholder="23"
+          required
+        />
+        <div
+          id="playerNumberErrors"
+          *ngIf="
+            playerNumberControl &&
+            playerNumberControl.touched &&
+            playerNumberControl.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="playerNumberControl.errors?.['required']">
+            Player Number is required.
+          </div>
+          <div *ngIf="playerNumberControl.errors?.['inValidPlayerNumber']">
+            Minimum Value is 1.
+          </div>
+        </div>
+      </div>
+      <!-- Form Input Player's Number -->
+
+      <!-- Form Input Card Value -->
+      <div class="col-12">
+        <label for="username" class="form-label">
+          Estimated Card Value
+          <span class="text-muted">(Optional)</span>
+        </label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">Card Value</span>
+          <input
+            type="number"
+            class="form-control"
+            id="cardValue"
+            formControlName="cardValue"
+            placeholder="Enter Card Value"
+          />
+          <div
+            id="cardValueErrors"
+            *ngIf="
+              cardValueControl &&
+              cardValueControl.touched &&
+              cardValueControl.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="cardValueControl.errors?.['inValidPlayerNumber']">
+              Minimum Value is 1.
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Form Input Card Value -->
+    </div>
+
+    <!-- Add or Update player's info -->
+    <hr class="my-4" />
+    <button
+      id="playerFromButton"
+      class="w-100 btn btn-primary btn-lg"
+      type="submit"
+      [disabled]="!playerCardInfoForm?.valid"
+    >
+      Submit
+    </button>
+
+    <!-- Add or Update player's info -->
+  </form>
+</section>

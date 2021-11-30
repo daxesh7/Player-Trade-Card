@@ -34,3 +34,24 @@ export interface ITeamsResponse {
     full_name: string;
     name: string;
 }
+
+export const initTeamResponse : ITeamsResponse[] = [
+    {
+        "id": 1,
+        "abbreviation": "ATL",
+        "city": "Atlanta",
+        "conference": "East",
+        "division": "Southeast",
+        "full_name": "Atlanta Hawks",
+        "name": "Hawks"
+    },
+    {
+        "id": 2,
+        "abbreviation": "BOS",
+        "city": "Boston",
+        "conference": "East",
+        "division": "Atlantic",
+        "full_name": "Boston Celtics",
+        "name": "Celtics"
+    }
+];

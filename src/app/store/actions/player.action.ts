@@ -37,17 +37,5 @@ export const getPlayerCardById = createAction(
     props<{payload : string | null}>()
 )
 
-export const getTeams = createAction(
-    PlayerAction.GET_TEAMS,
-)
 
-export const getTeamSuccess = createAction(
-    PlayerAction.GET_TEAMS_SUCCESS,
-    props<{payload : ITeamsResponse[]}>()
-)
-
-export const getTeamsFailure = createAction(
-    PlayerAction.GET_TEAMS_FAILURE,
-    props<{payload : string}>()
-)
 

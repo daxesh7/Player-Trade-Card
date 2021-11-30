@@ -1,26 +1,32 @@
 //Core DI
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 // Store Action Selectors
 import { Store } from '@ngrx/store';
-import * as actions from '../store/actions/player.action';
+import * as playerActions from '../store/actions/player.action';
+import * as teamActions from '../store/actions/teams.action';
 import * as selectors from '../store/selectors/player.selector';
 import { AppState } from '../store/state/app.state';
 // Services and Models
 import { UtilService } from '../services/util.service';
-import { IPlayerCard } from '../models/player.model';
+import { IPlayerCard, ITeamsResponse } from '../models/player.model';
 import { PlayerCardService } from '../services/player-card.service';
+import {Observable , of} from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit  {
 
   playerId : string | null = '0';
   playerCards : IPlayerCard[] = [];  
   totalCardValue : number = 0;
+  teams$ : Observable<ITeamsResponse[]> = of([]);
+  loading$ : Observable<boolean> = of(false);
+  error$ : Observable<string> = of('');
+
 
 
   constructor(
@@ -34,7 +40,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     // get all cards action
-    this.store.dispatch(actions.getPlayerCards());
+    this.store.dispatch(playerActions.getPlayerCards());
+    this.store.dispatch(teamActions.getTeams());
     // based on parma do get by Id Call
     // this.route.paramMap.subscribe((paramMap: ParamMap) => {
     //   const id : string | null = paramMap.get('id');      
@@ -54,6 +61,11 @@ export class HomePageComponent implements OnInit {
       this.totalCardValue = this.playerCardService.getEstimatedCardTotal(data);
     });
 
+    // Teams
+    this.teams$ = this.store.select(store => store.teamsState.teams);
+    this.loading$ = this.store.select(store => store.teamsState.loading);
+    this.error$ = this.store.select(store => store.teamsState.error);
+
   };
 
   /*
@@ -65,9 +77,9 @@ export class HomePageComponent implements OnInit {
   submitCardHandler(itemToSubmit : IPlayerCard ) {
     // console.log('submitCardHandler', itemToSubmit);
     if(!itemToSubmit.id || itemToSubmit.id === '0'){
-      this.store.dispatch(actions.addPlayerCard({payload : itemToSubmit}));
+      this.store.dispatch(playerActions.addPlayerCard({payload : itemToSubmit}));
     }else {
-      this.store.dispatch(actions.updatePlayerCard({payload : itemToSubmit}));
+      this.store.dispatch(playerActions.updatePlayerCard({payload : itemToSubmit}));
     }
   }
 
@@ -78,7 +90,7 @@ export class HomePageComponent implements OnInit {
   * retrun: void 
   */
   removeCardHandler(itemToRemove : IPlayerCard ) {    
-    this.store.dispatch(actions.deletePlayerCard({payload : itemToRemove.id}));
+    this.store.dispatch(playerActions.deletePlayerCard({payload : itemToRemove.id}));
   }
 
   /*
@@ -88,8 +100,30 @@ export class HomePageComponent implements OnInit {
   * retrun: void 
   */
   selectCardHandler(itemSelected : IPlayerCard ) {    
-    this.store.dispatch(actions.getPlayerCardById({payload : itemSelected.id}));
+    this.store.dispatch(playerActions.getPlayerCardById({payload : itemSelected.id}));
     // this.router.navigate(['/home', itemSelected.id])
   }
+
+
+   // @ViewChild("addressInputRef", { static: false })
+  // teamRef!: ElementRef;
+
+  // showTeamsList : boolean = false;
+  // teamSearchQuery : string = '';
+  // ngAfterViewInit()
+  // {
+    
+  //   console.log('el', this.teamRef);
+    
+  // }
+  // focusOnTeamInput(value :string) {
+  //   console.log('focusOnTeamInput' , value);  
+  //   console.log('focusOnTeamInput' , this.teamSearchQuery);  
+  // }
+
+  // searchOnTeamList(value : string) {
+  //   console.log('searchOnTeamList' , value);  
+  //   console.log('searchOnTeamList' , this.teamSearchQuery);  
+  // }
 
 }

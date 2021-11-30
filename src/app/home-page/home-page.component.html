@@ -25,3 +25,21 @@
     </div>
   </main>
 </div>
+
+<!-- <div class="col-12 py-5">
+  <label for="address" class="form-label">Teams</label>
+  <input
+    #addressInputRef
+    type="text"
+    class="form-control"
+    id="autoCompleteTeams"
+    placeholder="Lakers"
+    (blur)="($event) => focusOnTeamInput($event)"
+    (keyup)="($event) => searchOnTeamList($event)"
+  />
+  <div class="container" *ngIf="showTeamsList">
+    <ul *ngFor="let team of teams$ | async">
+      <li>{{ team.name }}</li>
+    </ul>
+  </div>
+</div> -->

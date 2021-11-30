@@ -37,7 +37,7 @@ describe('PlayerApiService', () => {
 
   describe('GetTeams', () => {
     it('should return an Observable<ITeamsResponse[]>', () => {
-      const dummyTeams : ITeamsResponse[] = [{
+      const dummyTeams : {data :ITeamsResponse[]} = {data : [{
         "id": 1,
         "abbreviation": "ATL",
         "city": "Atlanta",
@@ -54,14 +54,14 @@ describe('PlayerApiService', () => {
         "division": "Atlantic",
         "full_name": "Boston Celtics",
         "name": "Celtics"
-    }];
+    }]};
   
-      service.getAllTeams().subscribe((teams : ITeamsResponse[]) => {
-        expect(teams.length).toBe(2);
+      service.getAllTeams().subscribe((teams : {data : ITeamsResponse[]}) => {
+        expect(teams.data.length).toBe(2);
         expect(teams).toEqual(dummyTeams);
       });
   
-      const req = httpMock.expectOne(`${service.PLAYER_URL} + '/teams'`);
+      const req = httpMock.expectOne(`${service.PLAYER_URL}/teams`);
       expect(req.request.method).toBe("GET");
       req.flush(dummyTeams);
     });

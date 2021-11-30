@@ -10,12 +10,13 @@ export class PlayerApiService {
 
   public SERVER_URL = "http://localhost:3000/data";
   public PLAYER_URL = "https://www.balldontlie.io/api/v1";
+  
 
   constructor(private httpClient : HttpClient) { }
 
    // API test Calls
    getAllTeams() {
-    return this.httpClient.get<ITeamsResponse[]>(`${this.PLAYER_URL} + '/teams'`).pipe(
+    return this.httpClient.get<{data :ITeamsResponse[]}>(`${this.PLAYER_URL}/teams`).pipe(
       delay(500)
     );
   }

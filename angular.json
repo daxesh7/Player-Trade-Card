@@ -30,7 +30,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [              
+            "styles": [
               "src/styles.scss"
             ],
             "scripts": []
@@ -98,14 +98,26 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [              
+            "styles": [
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "Player-Trade-Card"
+  "defaultProject": "Player-Trade-Card",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

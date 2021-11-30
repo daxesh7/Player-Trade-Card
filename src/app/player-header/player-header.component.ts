@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './player-header.component.html',
   styleUrls: ['./player-header.component.scss']
 })
-export class PlayerHeaderComponent implements OnInit {
+export class PlayerHeaderComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

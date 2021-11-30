@@ -1,9 +1,6 @@
 import { Component, Input, OnInit, Output , EventEmitter } from '@angular/core';
 import { IPlayerCard } from '../models/player.model';
 import { UtilService } from '../services/util.service';
-import { Store ,select } from '@ngrx/store';
-import * as selectors from '../store/selectors/player.selector';
-import { AppState } from '../store/state/app.state';
 import { PlayerCardService } from '../services/player-card.service';
 
 
@@ -18,14 +15,14 @@ export class PlayerListComponent implements OnInit {
   @Input() public playerCards : IPlayerCard[] = [];
   @Input() public displayPlayerCards : IPlayerCard[] = [];
   @Input() public totalCardValue : number = 0;
-  @Output() public onRemove : EventEmitter<IPlayerCard> = new EventEmitter();
-  @Output() public onSelect : EventEmitter<IPlayerCard> = new EventEmitter();
+  @Output() public removeCardEvent : EventEmitter<IPlayerCard> = new EventEmitter();
+  @Output() public selectCardEvent : EventEmitter<IPlayerCard> = new EventEmitter();
 
   searchQuery : string = '';
   isSearchActive : boolean = false;
   
 
-  constructor(private utilService : UtilService , private playerCardService : PlayerCardService ,private store : Store<AppState>) { }
+  constructor(private utilService : UtilService , private playerCardService : PlayerCardService) { }
 
   ngOnInit(): void {
     // this.store.select(selectors.selectorGetPlayerCards)
@@ -75,12 +72,12 @@ export class PlayerListComponent implements OnInit {
     };    
   }
 
-  onRemoveCard(playerCard : IPlayerCard) {
-    this.onRemove.emit(playerCard);
+  removeCard(playerCard : IPlayerCard) {
+    this.removeCardEvent.emit(playerCard);
   }
 
-  onSelectCard(playerCard : IPlayerCard) {
-    this.onSelect.emit(playerCard);
+  selectCard(playerCard : IPlayerCard) {
+    this.selectCardEvent.emit(playerCard);
   }
   
 

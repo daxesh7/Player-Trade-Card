@@ -6,7 +6,7 @@ import { playerCardReducer } from '../store/reducers/player.reducer';
 
 import { PlayerFormComponent } from './player-form.component';
 
-fdescribe('PlayerFormComponent', () => {
+describe('PlayerFormComponent', () => {
   let component: PlayerFormComponent;
   let fixture: ComponentFixture<PlayerFormComponent>;
 

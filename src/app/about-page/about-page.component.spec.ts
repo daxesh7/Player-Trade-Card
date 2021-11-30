@@ -22,4 +22,8 @@ describe('AboutPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have title', () => {
+    expect(component.title).toEqual('Player Card Form');
+  });
 });

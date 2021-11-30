@@ -5,7 +5,7 @@
       <!-- Layout Player's Cards Form-->
       <div class="col-md-6 col-lg-6">
         <app-player-form
-          (onSubmit)="submitCardHandler($event)"
+          (submitCardEvent)="submitCardHandler($event)"
         ></app-player-form>
       </div>
       <!-- Layout Player's Cards Form **-->
@@ -17,8 +17,8 @@
           [playerCards]="playerCards"
           [displayPlayerCards]="playerCards"
           [totalCardValue]="totalCardValue"
-          (onRemove)="removeCardHandler($event)"
-          (onSelect)="selectCardHandler($event)"
+          (removeCardEvent)="removeCardHandler($event)"
+          (selectCardEvent)="selectCardHandler($event)"
         ></app-player-list>
       </div>
       <!-- Layout List of Player's Cards ** -->

@@ -1,6 +1,6 @@
 // Di
-import { Component, Input, OnInit, Output , EventEmitter } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Component, OnInit, Output , EventEmitter } from '@angular/core';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable , of} from 'rxjs';
 
 // Store and actions and selectors
@@ -24,7 +24,7 @@ export class PlayerFormComponent implements OnInit {
 
   
  
-  @Output() public onSubmit : EventEmitter<IPlayerCard> = new EventEmitter();
+  @Output() public submitCardEvent : EventEmitter<IPlayerCard> = new EventEmitter();
   
 
   public playerCardInfo : IPlayerCard = initPlayerCard;
@@ -120,10 +120,10 @@ export class PlayerFormComponent implements OnInit {
     return this.playerCardInfoForm?.get('cardValue');
   }
 
-  onCardSubmit(){
+  submitCard(){
     // console.log(this.playerCardInfoForm);
     if(this.playerCardInfoForm && this.playerCardInfoForm.valid){
-      this.onSubmit.emit(this.playerCardInfoForm?.value);
+      this.submitCardEvent.emit(this.playerCardInfoForm?.value);
       this.playerCardInfo = initPlayerCard;
       this.playerCardInfoForm.reset();
     }

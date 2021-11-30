@@ -1,7 +1,6 @@
 // core modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 
 // store
@@ -19,9 +18,19 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterPageComponent } from './footer-page/footer-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterModule, Routes } from '@angular/router';
 
 
 
+const routes: Routes = [
+  { path: 'home', component: HomePageComponent },
+  { path: 'home/:id', component: HomePageComponent },
+  { path: '', redirectTo:'/home', pathMatch: 'full' },
+  { path: 'about', component: AboutPageComponent },
+  { path: '**', component: PageNotFoundComponent }
+
+];
 
 
 @NgModule({
@@ -37,13 +46,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,    
+    RouterModule.forRoot(routes),    
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
       playerCardState : playerCardReducer
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

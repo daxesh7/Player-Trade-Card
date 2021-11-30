@@ -1,6 +1,6 @@
 //Core DI
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 // Store Action Selectors
 import { Store } from '@ngrx/store';
 import * as actions from '../store/actions/player.action';
@@ -8,7 +8,7 @@ import * as selectors from '../store/selectors/player.selector';
 import { AppState } from '../store/state/app.state';
 // Services and Models
 import { UtilService } from '../services/util.service';
-import { initPlayerCard, IPlayerCard } from '../models/player.model';
+import { IPlayerCard } from '../models/player.model';
 import { PlayerCardService } from '../services/player-card.service';
 
 @Component({
@@ -36,15 +36,15 @@ export class HomePageComponent implements OnInit {
     // get all cards action
     this.store.dispatch(actions.getPlayerCards());
     // based on parma do get by Id Call
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      const id : string | null = paramMap.get('id');      
-      if(!this.utilService.isNullOrEmpty(id) && id !== '0') {
-        this.playerId = id;        
-        this.store.dispatch(actions.getPlayerCardById({payload: this.playerId}));
-      }else {
-        this.router.navigate(['/']);
-      }
-    });
+    // this.route.paramMap.subscribe((paramMap: ParamMap) => {
+    //   const id : string | null = paramMap.get('id');      
+    //   if(!this.utilService.isNullOrEmpty(id) && id !== '0') {
+    //     this.playerId = id;        
+    //     this.store.dispatch(actions.getPlayerCardById({payload: this.playerId}));
+    //   }else {
+    //     this.router.navigate(['/']);
+    //   }
+    // });
 
     //selectors
     this.store.select(selectors.selectorGetPlayerCards)
@@ -82,8 +82,8 @@ export class HomePageComponent implements OnInit {
 
   selectCardHandler(itemSelected : IPlayerCard ) {
     // console.log('selectCardHandler', itemSelected);
-    // this.store.dispatch(actions.getPlayerCardById({payload : itemSelected.playerNumber}));
-    this.router.navigate(['/home', itemSelected.id])
+    this.store.dispatch(actions.getPlayerCardById({payload : itemSelected.id}));
+    // this.router.navigate(['/home', itemSelected.id])
   }
 
 }

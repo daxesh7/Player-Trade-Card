@@ -4,7 +4,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'home/:id', component: HomePageComponent },
   { path: '', redirectTo:'/home', pathMatch: 'full' },

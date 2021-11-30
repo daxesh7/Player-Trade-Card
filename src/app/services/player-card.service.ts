@@ -21,12 +21,20 @@ export class PlayerCardService {
   }
 
   updatePlayerCardToList(list : IPlayerCard[] , itemToUpdate : IPlayerCard) : IPlayerCard[] {
+    const updatedList : IPlayerCard [] = [];
     list.map((palyerCard : IPlayerCard) => {
       if(palyerCard.id === itemToUpdate.id){
-        palyerCard = itemToUpdate;
+        const updatedPalyerCard = {
+          ...itemToUpdate
+        };
+        updatedList.push(updatedPalyerCard);
+      }else {
+        updatedList.push(palyerCard);
       }
-    })
-    return list;
+    });
+    console.log('updatePlayerCardToList', updatedList);
+    
+    return updatedList;
   }
 
   deletePlayerCardFromList(list : IPlayerCard[] , id : string) : IPlayerCard[] {

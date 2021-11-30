@@ -1,6 +1,11 @@
+
 # PlayerTradeCard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+
+# Frame Works used
+Angular , Rxjs , NgRx , Express , CI/CD , Jest , Cypress , Sonar Cube , Deployment
+
 
 ## Development server
 

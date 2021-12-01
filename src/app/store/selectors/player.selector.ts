@@ -24,3 +24,8 @@ export const selctorGetSearchQuery = createSelector(
     playerCardState,
   (state: IPlayerCardState) => state?.searchQuery
 );
+
+export const selectorIsLoading = createSelector(
+  playerCardState,
+(state: IPlayerCardState) : boolean => state?.isLoading
+);

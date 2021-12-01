@@ -1,3 +1,11 @@
 {
-    "playerCards": []
+    "playerCards": [
+    {
+        "id": "123",
+        "firstName":"Ike" , 
+        "lastName":"Anigbogu" , 
+        "playerNumber": 14 , 
+        "teamName": "Indiana Pacers" , 
+        "cardValue" : 0
+    }]
 }

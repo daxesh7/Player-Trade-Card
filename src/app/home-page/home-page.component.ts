@@ -1,5 +1,5 @@
 //Core DI
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 // Store Action Selectors
 import { Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { IPlayerCard } from '../models/player.model';
 import { PlayerCardService } from '../services/player-card.service';
 
 
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -22,6 +23,7 @@ export class HomePageComponent implements OnInit  {
   playerId : string | null = '0';
   playerCards : IPlayerCard[] = [];  
   totalCardValue : number = 0;
+  isLoading : boolean = true;
 
 
 
@@ -31,7 +33,8 @@ export class HomePageComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,  
     private utilService : UtilService,
-    private playerCardService : PlayerCardService) {
+    private playerCardService : PlayerCardService,
+    ) {
 
   }
 
@@ -39,6 +42,7 @@ export class HomePageComponent implements OnInit  {
     // get all cards action
     this.store.dispatch(playerActions.getPlayerCards());
 
+    // this.playerCardApiService.getAllPlayerCards();
     // based on parma do get by Id Call
     // this.route.paramMap.subscribe((paramMap: ParamMap) => {
     //   const id : string | null = paramMap.get('id');      

@@ -1,7 +1,7 @@
 import * as PlayerCardActions  from '../actions/player.action';
 import { initPlayerCardState, IPlayerCardState } from '../state/player.state';
 import { PlayerCardService } from '../../services/player-card.service';
-import { createReducer , on} from '@ngrx/store';
+import { ActionsSubject, createReducer , on} from '@ngrx/store';
 import { initPlayerCard } from 'src/app/models/player.model';
 
 
@@ -57,4 +57,16 @@ export const playerCardReducer = createReducer(
             selectedPlayerCard: getAllCardbyId,
         };
     }),
+
+    //#region  API ACTION REDUCERS
+    on(PlayerCardActions.getPlayerCardsApi , (state : IPlayerCardState , {payload}) => {
+        // console.log('reducers getPlayerCardsApi', payload);
+        return {
+            ...state,
+            playerCards: payload,
+            isLoading : false
+        };
+    }),
+
+    //#endregion
 );

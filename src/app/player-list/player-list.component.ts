@@ -15,6 +15,7 @@ export class PlayerListComponent implements OnInit {
   @Input() public playerCards : IPlayerCard[] = [];
   @Input() public displayPlayerCards : IPlayerCard[] = [];
   @Input() public totalCardValue : number = 0;
+  @Input() public isLoading : boolean = true;
   @Output() public removeCardEvent : EventEmitter<IPlayerCard> = new EventEmitter();
   @Output() public selectCardEvent : EventEmitter<IPlayerCard> = new EventEmitter();
 

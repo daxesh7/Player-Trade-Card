@@ -6,6 +6,7 @@ export interface IPlayerCardState {
     selectedPlayerCard: IPlayerCard,
     searchQuery : string;
     totalCardValue : number;
+    isLoading : boolean;
 };
 
 export const initPlayerCardState : IPlayerCardState = {
@@ -13,5 +14,6 @@ export const initPlayerCardState : IPlayerCardState = {
     playerCards: [],
     selectedPlayerCard: initPlayerCard,
     searchQuery: '',
-    totalCardValue : 0
+    totalCardValue : 0,
+    isLoading : true,
 };

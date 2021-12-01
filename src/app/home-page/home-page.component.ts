@@ -4,14 +4,13 @@ import { Router, ActivatedRoute} from '@angular/router';
 // Store Action Selectors
 import { Store } from '@ngrx/store';
 import * as playerActions from '../store/actions/player.action';
-import * as teamActions from '../store/actions/teams.action';
 import * as selectors from '../store/selectors/player.selector';
 import { AppState } from '../store/state/app.state';
 // Services and Models
 import { UtilService } from '../services/util.service';
-import { IPlayerCard, ITeamsResponse } from '../models/player.model';
+import { IPlayerCard } from '../models/player.model';
 import { PlayerCardService } from '../services/player-card.service';
-import {Observable , of} from 'rxjs';
+
 
 @Component({
   selector: 'app-home-page',
@@ -23,9 +22,7 @@ export class HomePageComponent implements OnInit  {
   playerId : string | null = '0';
   playerCards : IPlayerCard[] = [];  
   totalCardValue : number = 0;
-  teams$ : Observable<ITeamsResponse[]> = of([]);
-  loading$ : Observable<boolean> = of(false);
-  error$ : Observable<string> = of('');
+
 
 
 
@@ -41,7 +38,7 @@ export class HomePageComponent implements OnInit  {
   ngOnInit(): void {
     // get all cards action
     this.store.dispatch(playerActions.getPlayerCards());
-    this.store.dispatch(teamActions.getTeams());
+
     // based on parma do get by Id Call
     // this.route.paramMap.subscribe((paramMap: ParamMap) => {
     //   const id : string | null = paramMap.get('id');      
@@ -60,11 +57,6 @@ export class HomePageComponent implements OnInit  {
       this.playerCards = data;
       this.totalCardValue = this.playerCardService.getEstimatedCardTotal(data);
     });
-
-    // Teams
-    this.teams$ = this.store.select(store => store.teamsState.teams);
-    this.loading$ = this.store.select(store => store.teamsState.loading);
-    this.error$ = this.store.select(store => store.teamsState.error);
 
   };
 

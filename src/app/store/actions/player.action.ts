@@ -1,5 +1,5 @@
 import {Action, createAction , props} from '@ngrx/store';
-import {IPlayerCard, ITeamsResponse} from '../../models/player.model';
+import {IPlayerCard} from '../../models/player.model';
 
 export enum PlayerAction {
     ADD_PLAYER_CARD = 'ADD_PLAYER_CARD',

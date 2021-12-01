@@ -8,7 +8,7 @@ import { HttpClientModule } from  '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {playerCardReducer} from './store/reducers/player.reducer';
-import {teamReducer} from './store/reducers/team.reducers';
+
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
@@ -27,7 +27,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 // custom modules
 import { AppRoutingModule } from './app-routing.module';
-import { TeamsEffects } from './store/effects/teams.effects';
+
 
 
 
@@ -51,10 +51,9 @@ import { TeamsEffects } from './store/effects/teams.effects';
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({
-      playerCardState : playerCardReducer,
-      teamsState : teamReducer
+      playerCardState : playerCardReducer
     }),
-    EffectsModule.forRoot([TeamsEffects]),
+    
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot()
   ],

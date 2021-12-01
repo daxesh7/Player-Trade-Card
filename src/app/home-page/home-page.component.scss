@@ -1,0 +1,19 @@
+$small: 300px;
+$medium: 800px;
+
+.responsive {
+  @media screen and (max-width: $medium) and (min-width: $small) {
+    #mainGrid {
+      margin-top: 50px;
+
+      #playerCardList {
+        margin-top: 100px;
+      }
+    }
+  }
+  @media screen and (min-width: $medium) {
+    #mainGrid {
+      margin-top: 100px;
+    }
+  }
+}

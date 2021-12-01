@@ -104,26 +104,4 @@ export class HomePageComponent implements OnInit  {
     // this.router.navigate(['/home', itemSelected.id])
   }
 
-
-   // @ViewChild("addressInputRef", { static: false })
-  // teamRef!: ElementRef;
-
-  // showTeamsList : boolean = false;
-  // teamSearchQuery : string = '';
-  // ngAfterViewInit()
-  // {
-    
-  //   console.log('el', this.teamRef);
-    
-  // }
-  // focusOnTeamInput(value :string) {
-  //   console.log('focusOnTeamInput' , value);  
-  //   console.log('focusOnTeamInput' , this.teamSearchQuery);  
-  // }
-
-  // searchOnTeamList(value : string) {
-  //   console.log('searchOnTeamList' , value);  
-  //   console.log('searchOnTeamList' , this.teamSearchQuery);  
-  // }
-
 }

@@ -1,7 +1,8 @@
-<div class="container">
+<div class="container responsive">
   <main>
     <!-- Main Grid -->
-    <div class="row g-4 py-5" id="mainGrid">
+
+    <div class="row" id="mainGrid">
       <!-- Layout Player's Cards Form-->
       <div class="col-md-6 col-lg-6">
         <app-player-form
@@ -11,7 +12,7 @@
       <!-- Layout Player's Cards Form **-->
 
       <!-- Layout List of Player's Cards -->
-      <div class="col-md-6 col-lg-6">
+      <div class="col-md-6 col-lg-6" id="playerCardList">
         <!-- List of Player's Component -->
         <app-player-list
           [playerCards]="playerCards"
@@ -25,21 +26,3 @@
     </div>
   </main>
 </div>
-
-<!-- <div class="col-12 py-5">
-  <label for="address" class="form-label">Teams</label>
-  <input
-    #addressInputRef
-    type="text"
-    class="form-control"
-    id="autoCompleteTeams"
-    placeholder="Lakers"
-    (blur)="($event) => focusOnTeamInput($event)"
-    (keyup)="($event) => searchOnTeamList($event)"
-  />
-  <div class="container" *ngIf="showTeamsList">
-    <ul *ngFor="let team of teams$ | async">
-      <li>{{ team.name }}</li>
-    </ul>
-  </div>
-</div> -->

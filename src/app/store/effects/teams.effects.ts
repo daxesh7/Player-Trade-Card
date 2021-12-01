@@ -1,16 +1,21 @@
+//#region  Core DI imports
 import {Injectable} from '@angular/core';
+//#endregion
+//#region  Extendeed Lib Imports
 import {Actions , ofType , createEffect} from '@ngrx/effects';
-import {getTeamsFailure, getTeamSuccess, TeamActionTypes} from '../actions/teams.action';
 import {pipe , map , of} from 'rxjs';
 import {catchError, mergeMap } from 'rxjs/operators';
-import { PlayerApiService } from 'src/app/services/player-api.service';
+//#endregion
+//#region  Actions , Models & Services Imports
+import {getTeamsFailure, getTeamSuccess, TeamActionTypes} from '../actions/teams.action';
+import { TeamsApiService } from 'src/app/services/teams-api.service';
 import { ITeamsResponse } from 'src/app/models/player.model';
-
+//#endregion
 
 @Injectable()
 export class TeamsEffects {
 
-    constructor(private action$ : Actions , private playerApiService : PlayerApiService) {
+    constructor(private action$ : Actions , private teamsApiService : TeamsApiService) {
 
     }
     
@@ -18,7 +23,7 @@ export class TeamsEffects {
     .pipe(
         ofType(TeamActionTypes.GET_TEAMS),
         mergeMap(
-            () => this.playerApiService.getAllTeams()
+            () => this.teamsApiService.getAllTeams()
             .pipe(
                 map((data : {data: ITeamsResponse[]}) => getTeamSuccess({payload: data.data})),
                 catchError((error : string) => of(getTeamsFailure({payload: error})))

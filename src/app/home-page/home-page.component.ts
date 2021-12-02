@@ -1,16 +1,16 @@
-//Core DI
+//#region Core DI
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
-// Store Action Selectors
+//#endregion
+//#region  Store Action Selectors
 import { Store } from '@ngrx/store';
 import * as playerActions from '../store/actions/player.action';
 import * as selectors from '../store/selectors/player.selector';
 import { AppState } from '../store/state/app.state';
-// Services and Models
-import { UtilService } from '../services/util.service';
+//#endregion
+//#region  Services and Models
 import { IPlayerCard } from '../models/player.model';
 import { PlayerCardService } from '../services/player-card.service';
-
+//#endregion
 
 
 @Component({
@@ -30,19 +30,14 @@ export class HomePageComponent implements OnInit  {
 
   constructor(
     private store : Store<AppState>,
-    private route: ActivatedRoute,
-    private router: Router,  
-    private utilService : UtilService,
     private playerCardService : PlayerCardService,
-    ) {
+    ) {}
 
-  }
-
+    
   ngOnInit(): void {
     // get all cards action
-    this.store.dispatch(playerActions.getPlayerCards());
+    this.store.dispatch(playerActions.getPlayerCards());  
 
-    // this.playerCardApiService.getAllPlayerCards();
     // based on parma do get by Id Call
     // this.route.paramMap.subscribe((paramMap: ParamMap) => {
     //   const id : string | null = paramMap.get('id');      
@@ -56,8 +51,7 @@ export class HomePageComponent implements OnInit  {
 
     //selectors
     this.store.select(selectors.selectorGetPlayerCards)
-    .subscribe((data : IPlayerCard[]) => {
-      // console.log('selectorGetPlayerCards', data);
+    .subscribe((data : IPlayerCard[]) => {      
       this.playerCards = data;
       this.totalCardValue = this.playerCardService.getEstimatedCardTotal(data);
     });

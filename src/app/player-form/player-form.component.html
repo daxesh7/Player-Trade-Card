@@ -40,7 +40,8 @@
             Minimum 2 character are required.
           </div>
           <div *ngIf="firstNameControl.errors?.['forbiddenName']">
-            'demo' name is not allowed.
+            First name Cannot contain numbers , special character or multiple
+            strings
           </div>
         </div>
       </div>
@@ -72,6 +73,10 @@
           </div>
           <div *ngIf="lastNameControl.errors?.['minlength']">
             Minimum 2 character are required.
+          </div>
+          <div *ngIf="lastNameControl.errors?.['forbiddenName']">
+            last name Cannot contain numbers , special character or multiple
+            strings
           </div>
         </div>
       </div>
@@ -105,6 +110,10 @@
           </div>
           <div *ngIf="teamNameControl.errors?.['minlength']">
             Minimum 2 character are required.
+          </div>
+          <div *ngIf="teamNameControl.errors?.['forbiddenName']">
+            team name cannot contain numbers , special character or multiple
+            strings
           </div>
         </div>
       </div>

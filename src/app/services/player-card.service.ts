@@ -8,11 +8,8 @@ import { initPlayerCard, initPlayerCardList, IPlayerCard } from '../models/playe
   providedIn: 'root'
 })
 export class PlayerCardService {
- 
-
-
-  constructor() { }
-
+  
+  constructor() { }  
   
   /*
   * describe : Adds to card to card list and return the updated list

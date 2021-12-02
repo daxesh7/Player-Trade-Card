@@ -1,19 +1,18 @@
-// Di
+//#region  Core Di 
 import { Component, OnInit, Output , EventEmitter } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable , of} from 'rxjs';
-
-// Store and actions and selectors
+//#endregion
+//#region  Extended Libs
 import {Store} from '@ngrx/store';
 import * as selectors from '../store/selectors/player.selector';
 import { AppState } from '../store/state/app.state';
-import * as actions from '../store/actions/player.action';
-
-// Sevices and Models
+import { Observable , of} from 'rxjs';
+//#endregion
+//#region  Sevices and Models
 import { initPlayerCard, IPlayerCard } from '../models/player.model';
 import { UtilService } from '../services/util.service';
 import  {PlayerCardService } from '../services/player-card.service';
-
+//#endregion
 
 @Component({
   selector: 'app-player-form',
@@ -40,13 +39,14 @@ export class PlayerFormComponent implements OnInit {
 
     /*
     * describe : This a is async custom validator 
-    * on the first name to not have value as 'demo'
+    * on the first name to not have number values in it
     * param: none
     * retrun: void 
     */
-    firstNameValidator(): AsyncValidatorFn {
+    noNumberAllowedValidator(): AsyncValidatorFn {
       return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-        const forbidden = control.value === 'demo';   
+        const regexOnlyString = /^[A-Z]+$/i;
+        const forbidden = !control.value.trim().match(regexOnlyString);
         // reutn Observable of error if True    
         return forbidden ? of({forbiddenName: true}) : of(null);
       };
@@ -89,17 +89,19 @@ export class PlayerFormComponent implements OnInit {
         playerCardInfo.firstName,
         [Validators.required, Validators.minLength(2)],
         // custom validator
-        this.firstNameValidator(),
+        this.noNumberAllowedValidator(),
       ],
       lastName: [
         playerCardInfo.lastName,
-        [Validators.required, Validators.minLength(2)]
-        
+        [Validators.required, Validators.minLength(2)],
+        // custom validator
+        this.noNumberAllowedValidator(),        
       ],        
       teamName: [
         playerCardInfo.teamName,
-        [Validators.required, Validators.minLength(2)]
-        
+        [Validators.required, Validators.minLength(2)],
+        // custom validator
+        this.noNumberAllowedValidator(),            
       ],
       playerNumber: [
         playerCardInfo.playerNumber,
@@ -116,6 +118,7 @@ export class PlayerFormComponent implements OnInit {
     });
   }
 
+  //#region  Get ALL Form Controlls
    /*
     * describe : This is a function 
     * get the firstName form Control from the form group
@@ -170,6 +173,7 @@ export class PlayerFormComponent implements OnInit {
   get cardValueControl(){
     return this.playerCardInfoForm?.get('cardValue');
   }
+  //#endregion
 
   /*
   * describe : This function that handles submit event from the form

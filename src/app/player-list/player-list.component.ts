@@ -1,8 +1,11 @@
+//#region  Core DI
 import { Component, Input, OnInit, Output , EventEmitter } from '@angular/core';
+//#endregion
+//#region  Service and Models
 import { IPlayerCard } from '../models/player.model';
 import { UtilService } from '../services/util.service';
 import { PlayerCardService } from '../services/player-card.service';
-
+//#endregion
 
 
 @Component({
@@ -26,19 +29,8 @@ export class PlayerListComponent implements OnInit {
   constructor(private utilService : UtilService , private playerCardService : PlayerCardService) { }
 
   ngOnInit(): void {
-    // this.store.select(selectors.selectorGetPlayerCards)
-    // .subscribe((data : IPlayerCard[]) => {
-    //   // console.log('data', data);
-      
-    //   this.playerCards = data;
-    //   this.displayPlayerCards = data;
-    //   this.totalCardValue = this.getEstimatedCardTotal();
-    //   this.isSearchActive = false;
-    // });
-
     this.displayPlayerCards = this.playerCards;
     this.isSearchActive = false;
-    
   }
 
   /*
